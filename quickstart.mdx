@@ -1,80 +1,171 @@
 ---
-title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+title: Quickstart
+description: Deploy your first Cloudflare experiment in under 60 seconds
 ---
 
-## Get started in three steps
+Get started with Cloudflare Experiments by deploying a simple worker to the edge. Each experiment is designed to run in under 60 seconds and demonstrates real-world capabilities of the Cloudflare platform.
 
-Get your documentation site running locally and make your first customization.
+## Deploy an Experiment
 
-### Step 1: Set up your local environment
+The fastest way to get started is using the one-click deploy button. We'll use the **Where Am I** experiment as an example.
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+<Steps>
+  <Step title="Choose an experiment">
+    Browse the [available experiments](/experiments) and pick one to deploy. For this guide, we'll deploy [Where Am I](/experiments/whereami), which returns geolocation data from Cloudflare's edge.
+  </Step>
 
-### Step 2: Deploy your changes
+  <Step title="Click the deploy button">
+    Click the Deploy to Cloudflare Workers button from any experiment page or the main repository.
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+    [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/shrinathsnayak/cloudflare-experiments/tree/main/experiments/whereami)
+  </Step>
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+  <Step title="Authenticate with Cloudflare">
+    If you haven't already, you'll be prompted to sign in to your Cloudflare account. The deployment process will automatically:
+    - Create a new Worker
+    - Configure the necessary bindings
+    - Deploy to Cloudflare's global edge network
+  </Step>
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
-
-### Step 3: Go live
-
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
-
-## Next steps
-
-Now that you have your docs running, explore these key features:
-
-<CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
-</CardGroup>
+  <Step title="Access your deployed worker">
+    Once deployed, you'll receive a `*.workers.dev` URL where your experiment is live.
+  </Step>
+</Steps>
 
 <Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
+  Deploy from [shrinathsnayak/cloudflare-experiments](https://github.com/shrinathsnayak/cloudflare-experiments). To deploy from your own fork, change the owner in the deploy URL.
 </Note>
+
+## Test Your Deployment
+
+Once deployed, test your worker using curl or your browser.
+
+### Where Am I Example
+
+```bash
+curl https://your-worker.workers.dev/whereami
+```
+
+**Response:**
+
+```json
+{
+  "country": "US",
+  "city": "San Francisco",
+  "region": "California",
+  "timezone": "America/Los_Angeles",
+  "colo": "SFO",
+  "asn": 13335
+}
+```
+
+### Is It Down Example
+
+Check if a website is reachable from Cloudflare's edge:
+
+```bash
+curl "https://your-worker.workers.dev/check?url=https://www.cloudflare.com"
+```
+
+**Response:**
+
+```json
+{
+  "status": "reachable",
+  "responseTime": 87,
+  "statusCode": 200,
+  "colo": "LHR"
+}
+```
+
+<Tip>
+  The `colo` field shows the edge data center (IATA code) that served your request. Cloudflare has over 300 locations worldwide.
+</Tip>
+
+## Local Development
+
+To modify an experiment or develop locally, clone the repository and run the worker on your machine.
+
+### Install Dependencies
+
+<CodeGroup>
+
+```bash npm
+cd experiments/whereami
+npm install
+```
+
+```bash pnpm
+cd experiments/whereami
+pnpm install
+```
+
+```bash yarn
+cd experiments/whereami
+yarn install
+```
+
+</CodeGroup>
+
+### Start Development Server
+
+<CodeGroup>
+
+```bash npm
+npm run dev
+```
+
+```bash pnpm
+pnpm dev
+```
+
+```bash yarn
+yarn dev
+```
+
+</CodeGroup>
+
+The worker will be available at `http://localhost:8787`.
+
+### Test Locally
+
+```bash
+curl http://localhost:8787/whereami
+```
+
+<Note>
+  When running locally, the `cf` object may be empty or minimal. Full geolocation data appears when deployed to Cloudflare's edge network.
+</Note>
+
+## What You Can Build
+
+Each experiment in this collection demonstrates **practical capabilities** of the Cloudflare platform:
+
+- **Workers** — Edge compute without backend servers
+- **Workers AI** — Run AI models at the edge
+- **Browser Rendering** — Capture screenshots and manipulate web pages
+- **HTMLRewriter** — Transform HTML on the fly
+- **Edge Networking** — Global request/response handling
+- **D1** — Serverless SQL database
+- **R2** — Object storage
+
+<Tip>
+  All experiments are **stateless first** and use edge compute, fetch, and HTML parsing without requiring persistent storage. Learn more about the design [philosophy](/philosophy).
+</Tip>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Explore Experiments" icon="flask" href="/experiments">
+    Browse all available experiments
+  </Card>
+  <Card title="Philosophy" icon="book" href="/philosophy">
+    Learn the design principles
+  </Card>
+  <Card title="Contributing" icon="code-pull-request" href="/contributing">
+    Add your own experiment
+  </Card>
+  <Card title="GitHub Repository" icon="github" href="https://github.com/shrinathsnayak/cloudflare-experiments">
+    View source code
+  </Card>
+</CardGroup>
