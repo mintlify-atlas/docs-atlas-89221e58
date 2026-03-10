@@ -1,0 +1,113 @@
+{
+  "projectType": "general",
+  "projectName": "Cloudflare Experiments",
+  "projectDescription": "A curated collection of experiments demonstrating practical developer tools built on the Cloudflare edge platform",
+  "theme": "aspen",
+  "primaryColor": "#f38020",
+  "lightColor": "#ff9c4d",
+  "darkColor": "#d16b0d",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "philosophy"
+            ]
+          },
+          {
+            "group": "AI & Machine Learning",
+            "pages": [
+              "experiments/ai-website-summary",
+              "experiments/github-repo-explainer",
+              "experiments/ai-bot-visibility"
+            ]
+          },
+          {
+            "group": "Web Scraping & Parsing",
+            "pages": [
+              "experiments/website-metadata-extractor",
+              "experiments/website-to-api",
+              "experiments/website-to-llms-txt",
+              "experiments/website-devtools-inspector",
+              "experiments/dependency-analyzer"
+            ]
+          },
+          {
+            "group": "Browser & Screenshots",
+            "pages": [
+              "experiments/screenshot-api"
+            ]
+          },
+          {
+            "group": "Network & Monitoring",
+            "pages": [
+              "experiments/is-it-down",
+              "experiments/url-dns-lookup",
+              "experiments/whereami"
+            ]
+          },
+          {
+            "group": "Storage & Data",
+            "pages": [
+              "experiments/r2-storage",
+              "experiments/link-shortener"
+            ]
+          },
+          {
+            "group": "Contributing",
+            "pages": [
+              "contributing",
+              "code-standards",
+              "adding-experiments"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Reference",
+        "groups": [
+          {
+            "group": "Resources",
+            "pages": [
+              "reference/cloudflare-features",
+              "reference/deployment",
+              "reference/architecture"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "14+ independent Cloudflare Workers experiments",
+    "Click-to-deploy button for each experiment",
+    "Workers AI integration for summarization and analysis",
+    "Browser Rendering for screenshots",
+    "D1 and KV for storage solutions",
+    "R2 object storage with public and private buckets",
+    "Edge networking and geolocation features",
+    "HTMLRewriter for web scraping and parsing",
+    "Stateless, edge-first architecture"
+  ],
+  "publicApiSurface": [
+    "AI Website Summary - GET /summary?url=...",
+    "Screenshot API - GET /screenshot?url=...",
+    "GitHub Repo Explainer - GET /repo?url=...",
+    "Dependency Analyzer - GET /analyze?url=...",
+    "Is It Down - GET /check?url=...",
+    "Website Metadata Extractor - GET /metadata?url=...",
+    "Website DevTools Inspector - GET /inspect?url=...",
+    "Website to API - GET /extract?url=...",
+    "Website to llms.txt - GET /convert?url=...",
+    "URL DNS Lookup - GET /dns?url=...",
+    "AI Bot Visibility - GET /check?url=...",
+    "R2 Storage - GET/PUT/DELETE /object?key=..., GET /list",
+    "Where Am I - GET /whereami",
+    "Link Shortener - POST /shorten, GET /:code"
+  ]
+}
